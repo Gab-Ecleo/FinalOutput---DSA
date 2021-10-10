@@ -16,10 +16,10 @@ int main()
 	while (isChoosing) 
 	{
 		cout << left
-			<< setw(10) << "[1] Sort \n"
-			<< setw(10) << "[2] Search \n"
-			<< setw(10) << "[3] Character Counting \n"
-			<< setw(10) << "[4] Exit Program \n";
+			<< "[1] Sort \n"
+			<< "[2] Search \n"
+			<< "[3] Character Counting \n"
+			<< "[4] Exit Program \n";
 
 
 		cout << "Choose an Algorithm: ";	
