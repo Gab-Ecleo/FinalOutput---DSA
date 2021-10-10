@@ -6,7 +6,7 @@ using namespace std;
 
 //Functions/Structures
 
-//Methods
+
 int main() 
 {
 	//variables
