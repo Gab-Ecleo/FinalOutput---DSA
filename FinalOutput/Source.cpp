@@ -1,5 +1,5 @@
-#include<iostream>;
-#include<iomanip>;
+#include<iostream>
+#include<iomanip>
 #include <map>
 using namespace std;
 
@@ -19,9 +19,16 @@ void CharCount()
         charCount[c]++;
     }
     
+	std::size_t i = 0;
+
     for(char &c: inputString)
     {
-        cout << c <<"-" << charCount.at(c)<<std::endl;
+        std::size_t index = inputString.find(c);
+        if(index != inputString.npos && (index == i))
+		{
+         std::cout << c <<" - " << charCount.at(c)<<std::endl;
+        }
+        ++i;
     }
 }
 
