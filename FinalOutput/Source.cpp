@@ -4,9 +4,30 @@
 using namespace std;
 
 //Global variables
-
+int num[10];
 //Functions/Structures
 
+
+int IntegerChecker() {
+	int num;
+
+	while (!(cin >> num)) {
+		cout << "You have entered wrong input. Enter a value: ";
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+	}
+	return num;
+}
+
+int SearchInput(int num[], int  inputNum) {
+	for (int i = 0; i < 10; i++) {
+		if (num[i] == inputNum) {
+			return i;
+		}
+	}
+	return -1;
+}
 void CharCount()
 {
 	string inputString;
@@ -48,7 +69,8 @@ int main()
 
 
 		cout << "Choose an Algorithm: ";	
-		for (;;) 
+		algoIndex = IntegerChecker();
+		/*for (;;) 
 		{
 			if (cin >> algoIndex)
 				break;
@@ -59,7 +81,7 @@ int main()
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			}
-		}
+		}*/
 
 		switch (algoIndex)
 		{
@@ -71,7 +93,43 @@ int main()
 		case 2:
 
 			//Linear Search Algorithm
+		{
+			//input the value
+			for (int i = 0; i < 10; i++) {
+				if (i + 1 == 1) {
+					cout << "Enter 1st number: ";
+					num[i] = IntegerChecker();
+				}
+				else if (i + 1 == 2) {
+					cout << "Enter 2nd number: ";
+					num[i] = IntegerChecker();
+				}
+				else if (i + 1 == 3) {
+					cout << "Enter 3rd number: ";
+					num[i] = IntegerChecker();
+				}
+				else if (i + 1 > 3) {
+					cout << "Enter " << i + 1 << "th number: ";
+					num[i] = IntegerChecker();
+				}
+			}
 
+			int searchNum;
+			char repeat;
+
+			cout << "\nEnter number to be search: ";
+			cin >> searchNum;
+			int location = SearchInput(num, searchNum);
+
+			if (location == -1) {
+				cout << "\nThe number is not in the array." << endl;
+			}
+			else {
+				cout << "\nthe location of " << searchNum << " is in index " << location << endl;
+			}
+			cout << "do you want to repeat again?  [Y] yes or [N] no" << endl;
+			cin >> repeat;
+		}
 			break;
 
 		case 3:
