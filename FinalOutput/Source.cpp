@@ -1,11 +1,29 @@
 #include<iostream>;
 #include<iomanip>;
+#include <map>
 using namespace std;
 
 //Global variables
 
 //Functions/Structures
 
+void CharCount()
+{
+	string inputString;
+    cout<<"Enter String Value: ";
+    cin>>inputString;
+    std::map<char, int> charCount;
+    
+    for(char &c: inputString)
+    {
+        charCount[c]++;
+    }
+    
+    for(char &c: inputString)
+    {
+        cout << c <<"-" << charCount.at(c)<<std::endl;
+    }
+}
 
 int main() 
 {
@@ -52,7 +70,7 @@ int main()
 		case 3:
 
 			//Character Counting Algorithm
-
+			CharCount();
 			break;
 		
 		case 4:
