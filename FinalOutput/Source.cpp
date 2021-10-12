@@ -9,6 +9,7 @@ int num[10];
 
 //Functions/Structures
 
+// checks for input validation 
 int IntegerChecker() {
 	int num;
 
@@ -20,6 +21,36 @@ int IntegerChecker() {
 	}
 	return num;
 }
+
+void RepeatMsg()
+{
+	int val = 0;
+	bool isChoosing = true;
+
+	//print message
+	cout << left
+		<< "[1]Yes	[2]No" << endl
+		<< "Choose Again?: ";
+
+
+	while (isChoosing)
+	{
+
+		val = IntegerChecker();
+
+		if (val < 1 || val > 2)
+		{
+			cout << "Number out of range.\n";
+			cout << "Choose Again?: ";
+		}
+		else
+			break;
+	}
+
+	if (val == 2)
+		exit(0);
+}
+
 
 void ClearConsole()
 {
@@ -77,14 +108,6 @@ int Partition(int arr[], int minIndex, int maxIndex, int sortMethod)
 	return i + 1;
 }
 
-int SearchInput(int num[], int  inputNum) {
-	for (int i = 0; i < 10; i++) {
-		if (num[i] == inputNum) {
-			return i;
-		}
-	}
-	return -1;
-}
 
 void SortValues(int arr[], int minIndex, int maxIndex, int sortMethod)
 {
@@ -113,34 +136,6 @@ void PrintArray(int arr[], int arrSize)
 	cout << "\n" << endl;
 }
 
-void RepeatMsg()
-{
-	int val = 0;
-	bool isChoosing = true;
-
-	//print message
-	cout << left
-		<< "[1]Yes	[2]No" << endl
-		<< "Choose Again?: ";
-	
-
-	while (isChoosing) 
-	{
-		
-		val = IntegerChecker();
-
-		if (val < 1 || val > 2)
-		{
-			cout << "Number out of range.\n";
-			cout << "Choose Again?: ";
-		}
-		else
-			break;
-	}
-
-	if (val == 2)
-		exit(0);
-}
 
 void CharCount()
 {
@@ -170,7 +165,35 @@ void CharCount()
 	RepeatMsg();
 	ClearConsole();
 }
+int NumFreq(int num[], int inputNum) {
+	int count = 0;
+	for (int i = 0; i < 10; i++) {
+		if (num[i] == inputNum) {
+			count++;
+		}
+	}
+	return count;
+}
+void SearchInput(int num[], int inputNum) {
+	int frequency = NumFreq(num, inputNum);
+	int i = 0;
+	int location[10];
 
+		for (int i = 0; i < 10; i++) {
+			if (num[i] == inputNum) {
+				location[i] = i;
+			}
+		}
+	if (frequency == 0) {
+		cout << "\nThe number is not in the array." << endl;
+	}
+	else {
+		cout << "\nthe location of " << inputNum << " is in index ";
+		for (int i = 0; i < frequency; i++) {
+			cout << location[i] << " ";
+		}
+	}
+}
 void LinearSearch()
 {
 	//input the value
@@ -194,19 +217,12 @@ void LinearSearch()
 	}
 
 	int searchNum;
-	char repeat;
 
 	cout << "\nEnter number to be search: ";
 	cin >> searchNum;
-	int location = SearchInput(num, searchNum);
+	SearchInput(num, searchNum);
 
-	if (location == -1) {
-		cout << "\nThe number is not in the array." << endl;
-	}
-	else {
-		cout << "\nthe location of " << searchNum << " is in index " << location << endl;
-	}
-
+	cout << endl;
 	RepeatMsg();
 	ClearConsole();
 }
@@ -270,7 +286,7 @@ int main()
 			<< "[4] Exit Program \n";
 
 
-		cout << "Choose an Algorithm: ";	
+		cout << "\nChoose an Algorithm: ";	
 		algoIndex = IntegerChecker();
 		ClearConsole();
 
