@@ -1,12 +1,13 @@
 #include<iostream>
 #include<iomanip>
-#include <map>
+#include<map>
 using namespace std;
 
 //Global variables
 int num[10];
-//Functions/Structures
 
+
+//Functions/Structures
 
 int IntegerChecker() {
 	int num;
@@ -20,6 +21,62 @@ int IntegerChecker() {
 	return num;
 }
 
+void ClearConsole()
+{
+	cout << "\033[H\033[2J";
+	cout.flush();
+}
+
+//Swapping Function
+void SwapValues(int* fVal, int* sVal)
+{
+	int placeHolder = *sVal;
+	*sVal = *fVal;
+	*fVal = placeHolder;
+}
+
+//Partioning Method
+int Partition(int arr[], int minIndex, int maxIndex, int sortMethod)
+{
+	//assign pivot
+	int pi = arr[maxIndex];
+
+	//instantiate sort method
+	bool sortBy;
+
+	int i = minIndex - 1;
+
+	//Check and Compare Values
+	for (int j = minIndex; j < maxIndex; j++)
+	{
+		switch (sortMethod)
+		{
+		case 1:
+			//Ascending
+			sortBy = arr[j] <= pi;
+			break;
+		case 2:
+			//Descending
+			sortBy = arr[j] >= pi;
+			break;
+		default:
+			break;
+		}
+
+		if (sortBy)
+		{
+			i++;
+			SwapValues(&arr[j], &arr[i]);
+		}
+	}
+
+	//After comparing move Pivot to its correct index
+	SwapValues(&arr[i + 1], &arr[maxIndex]);
+
+	//return last pivot assigned
+	return i + 1;
+}
+
 int SearchInput(int num[], int  inputNum) {
 	for (int i = 0; i < 10; i++) {
 		if (num[i] == inputNum) {
@@ -28,6 +85,63 @@ int SearchInput(int num[], int  inputNum) {
 	}
 	return -1;
 }
+
+void SortValues(int arr[], int minIndex, int maxIndex, int sortMethod)
+{
+	if (minIndex < maxIndex)
+	{
+		//Assign right Most Value as the first pivot
+		int pi = Partition(arr, minIndex, maxIndex, sortMethod);
+
+		//Recursion of Sorting
+
+		//for the right partition, the low values block
+		SortValues(arr, minIndex, pi - 1, sortMethod);
+
+		//for the left partion, the high block 
+		SortValues(arr, pi + 1, maxIndex, sortMethod);
+	}
+}
+
+void PrintArray(int arr[], int arrSize)
+{
+	for (int i = 0; i < arrSize; i++)
+	{
+		cout << left
+			<< setw(4) << arr[i];
+	}
+	cout << "\n" << endl;
+}
+
+void RepeatMsg()
+{
+	int val = 0;
+	bool isChoosing = true;
+
+	//print message
+	cout << left
+		<< "[1]Yes	[2]No" << endl
+		<< "Choose Again?: ";
+	
+
+	while (isChoosing) 
+	{
+		
+		val = IntegerChecker();
+
+		if (val < 1 || val > 2)
+		{
+			cout << "Number out of range.\n";
+			cout << "Choose Again?: ";
+		}
+		else
+			break;
+	}
+
+	if (val == 2)
+		exit(0);
+}
+
 void CharCount()
 {
 	string inputString;
@@ -51,16 +165,104 @@ void CharCount()
         }
         ++i;
     }
+
+
+	RepeatMsg();
+	ClearConsole();
 }
+
+void LinearSearch()
+{
+	//input the value
+	for (int i = 0; i < 10; i++) {
+		if (i + 1 == 1) {
+			cout << "Enter 1st number: ";
+			num[i] = IntegerChecker();
+		}
+		else if (i + 1 == 2) {
+			cout << "Enter 2nd number: ";
+			num[i] = IntegerChecker();
+		}
+		else if (i + 1 == 3) {
+			cout << "Enter 3rd number: ";
+			num[i] = IntegerChecker();
+		}
+		else if (i + 1 > 3) {
+			cout << "Enter " << i + 1 << "th number: ";
+			num[i] = IntegerChecker();
+		}
+	}
+
+	int searchNum;
+	char repeat;
+
+	cout << "\nEnter number to be search: ";
+	cin >> searchNum;
+	int location = SearchInput(num, searchNum);
+
+	if (location == -1) {
+		cout << "\nThe number is not in the array." << endl;
+	}
+	else {
+		cout << "\nthe location of " << searchNum << " is in index " << location << endl;
+	}
+
+	RepeatMsg();
+	ClearConsole();
+}
+
+void QuickSort() 
+{
+	int arr[10] = {};
+	int sortBy = 1;
+	bool isChoosing = true;
+
+	for (int i = 0; i < 10; i++)
+	{
+		cout << "Enter num[" << i + 1 << "]: ";
+		arr [i] = IntegerChecker();
+		ClearConsole();
+	}
+
+	cout << "Unsorted Array" << endl;
+	PrintArray(arr, 10);
+	cout << left
+		<< "[1] Ascending" << endl
+		<< "[2] Descending" << endl
+		<< "Sort by: ";
+
+	while (isChoosing)
+	{
+		sortBy = IntegerChecker();
+		if (sortBy < 1 || sortBy > 2)
+		{
+			cout << "Number out of range please try again.\n";
+			cout << "Sort by: ";
+		}
+		else
+			ClearConsole();
+			break;
+	}
+
+	cout << "Sorted Array" << endl;
+	SortValues(arr, 0, 9, sortBy);
+	PrintArray(arr, 10);
+
+	RepeatMsg();
+	ClearConsole();
+}
+
 
 int main() 
 {
 	//variables
 	bool isChoosing = true;
-	int algoIndex;
+	int algoIndex = 0;
+	int rep = 0;
 
 	while (isChoosing) 
 	{
+
 		cout << left
 			<< "[1] Sort \n"
 			<< "[2] Search \n"
@@ -70,66 +272,21 @@ int main()
 
 		cout << "Choose an Algorithm: ";	
 		algoIndex = IntegerChecker();
-		/*for (;;) 
-		{
-			if (cin >> algoIndex)
-				break;
-			else {
-				cout << "Invalid Input, please try again."
-					<< endl
-					<< "Choose an Algorithm: ";
-				cin.clear();
-				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			}
-		}*/
+		ClearConsole();
 
 		switch (algoIndex)
 		{
 		case 1:
 
 			//Quicksort Algorithm
+			QuickSort();
+
 
 			break;
 		case 2:
 
 			//Linear Search Algorithm
-		{
-			//input the value
-			for (int i = 0; i < 10; i++) {
-				if (i + 1 == 1) {
-					cout << "Enter 1st number: ";
-					num[i] = IntegerChecker();
-				}
-				else if (i + 1 == 2) {
-					cout << "Enter 2nd number: ";
-					num[i] = IntegerChecker();
-				}
-				else if (i + 1 == 3) {
-					cout << "Enter 3rd number: ";
-					num[i] = IntegerChecker();
-				}
-				else if (i + 1 > 3) {
-					cout << "Enter " << i + 1 << "th number: ";
-					num[i] = IntegerChecker();
-				}
-			}
-
-			int searchNum;
-			char repeat;
-
-			cout << "\nEnter number to be search: ";
-			cin >> searchNum;
-			int location = SearchInput(num, searchNum);
-
-			if (location == -1) {
-				cout << "\nThe number is not in the array." << endl;
-			}
-			else {
-				cout << "\nthe location of " << searchNum << " is in index " << location << endl;
-			}
-			cout << "do you want to repeat again?  [Y] yes or [N] no" << endl;
-			cin >> repeat;
-		}
+			LinearSearch();
 			break;
 
 		case 3:
