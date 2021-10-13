@@ -190,8 +190,6 @@ void SearchInput(int num[], int inputNum) {
 				if (num[i] == inputNum) {
 					
 					location[j] = i;
-					cout << i << endl;
-					cout << j << endl;
 					j++;
 
 			}
