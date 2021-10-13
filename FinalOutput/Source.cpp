@@ -165,6 +165,7 @@ void CharCount()
 	RepeatMsg();
 	ClearConsole();
 }
+//check the number of occurence on the array or if there is an occurence in the array
 int NumFreq(int num[], int inputNum) {
 	int count = 0;
 	for (int i = 0; i < 10; i++) {
@@ -174,20 +175,27 @@ int NumFreq(int num[], int inputNum) {
 	}
 	return count;
 }
+//locate the postion of the numbers and print the answer
 void SearchInput(int num[], int inputNum) {
 	int frequency = NumFreq(num, inputNum);
 	int i = 0;
 	int location[10];
 
-		for (int i = 0; i < 10; i++) {
-			if (num[i] == inputNum) {
-				location[i] = i;
-			}
-		}
 	if (frequency == 0) {
 		cout << "\nThe number is not in the array." << endl;
 	}
 	else {
+		int j = 0;
+		for (int i = 0; i < 10; i++) {
+				if (num[i] == inputNum) {
+					
+					location[j] = i;
+					cout << i << endl;
+					cout << j << endl;
+					j++;
+
+			}
+		}
 		cout << "\nthe location of " << inputNum << " is in index ";
 		for (int i = 0; i < frequency; i++) {
 			cout << location[i] << " ";
