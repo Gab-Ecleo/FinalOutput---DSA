@@ -14,6 +14,8 @@ int IntegerChecker() {
 
 	while (!(cin >> num)) {
 		cout << "Please input the correct value" << endl
+			<< ":" ;
+		cout << "Please input the correct value" << endl
 			<< ":";
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -176,34 +178,24 @@ void CharCount()
 	string inputString;
 	cout << "Enter String Value: ";
 	cin >> inputString;
-	if (inputString.size() > 100)
+	std::map<char, int> charCount;
+
+	for (char& c : inputString)
 	{
-		cout << "The string value limit is 100.";
+		charCount[c]++;
 	}
 
-	else
+	std::size_t i = 0;
+
+	for (char& c : inputString)
 	{
-		std::map<char, int> charCount;
-
-		for (char& c : inputString)
+		std::size_t index = inputString.find(c);
+		if (index != inputString.npos && (index == i))
 		{
-			charCount[c]++;
+			std::cout << c << " - " << charCount.at(c) << std::endl;
 		}
-
-		std::size_t i = 0;
-
-		for (char& c : inputString)
-		{
-			std::size_t index = inputString.find(c);
-			if (index != inputString.npos && (index == i))
-			{
-				std::cout << c << " - " << charCount.at(c) << std::endl;
-			}
-			++i;
-		}
+		++i;
 	}
-	RepeatMsg();
-	ClearConsole();
 }
 
 void LinearSearch()
@@ -280,7 +272,8 @@ void QuickSort()
 	ClearConsole();
 }
 
-int main()
+
+int main() 
 {
 	//variables
 	bool isChoosing = true;
