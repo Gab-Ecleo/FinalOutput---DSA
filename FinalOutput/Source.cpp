@@ -9,12 +9,13 @@ int num[10];
 
 //Functions/Structures
 
-// checks for input validation 
+//checks for input validation 
 int IntegerChecker() {
 	int num;
 
 	while (!(cin >> num)) {
-		cout << "You have entered wrong input. Enter a value: ";
+		cout << "Please input the correct value" << endl
+			<< ":" ;
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -50,7 +51,6 @@ void RepeatMsg()
 	if (val == 2)
 		exit(0);
 }
-
 
 void ClearConsole()
 {
@@ -108,7 +108,6 @@ int Partition(int arr[], int minIndex, int maxIndex, int sortMethod)
 	return i + 1;
 }
 
-
 void SortValues(int arr[], int minIndex, int maxIndex, int sortMethod)
 {
 	if (minIndex < maxIndex)
@@ -136,35 +135,6 @@ void PrintArray(int arr[], int arrSize)
 	cout << "\n" << endl;
 }
 
-
-void CharCount()
-{
-	string inputString;
-    cout<<"Enter String Value: ";
-    cin>>inputString;
-    std::map<char, int> charCount;
-    
-    for(char &c: inputString)
-    {
-        charCount[c]++;
-    }
-    
-	std::size_t i = 0;
-
-    for(char &c: inputString)
-    {
-        std::size_t index = inputString.find(c);
-        if(index != inputString.npos && (index == i))
-		{
-         std::cout << c <<" - " << charCount.at(c)<<std::endl;
-        }
-        ++i;
-    }
-
-
-	RepeatMsg();
-	ClearConsole();
-}
 //check the number of occurence on the array or if there is an occurence in the array
 int NumFreq(int num[], int inputNum) {
 	int count = 0;
@@ -175,6 +145,7 @@ int NumFreq(int num[], int inputNum) {
 	}
 	return count;
 }
+
 //locate the postion of the numbers and print the answer
 void SearchInput(int num[], int inputNum) {
 	int frequency = NumFreq(num, inputNum);
@@ -200,6 +171,36 @@ void SearchInput(int num[], int inputNum) {
 		}
 	}
 }
+
+void CharCount()
+{
+	string inputString;
+	cout << "Enter String Value: ";
+	cin >> inputString;
+	std::map<char, int> charCount;
+
+	for (char& c : inputString)
+	{
+		charCount[c]++;
+	}
+
+	std::size_t i = 0;
+
+	for (char& c : inputString)
+	{
+		std::size_t index = inputString.find(c);
+		if (index != inputString.npos && (index == i))
+		{
+			std::cout << c << " - " << charCount.at(c) << std::endl;
+		}
+		++i;
+	}
+
+
+	RepeatMsg();
+	ClearConsole();
+}
+
 void LinearSearch()
 {
 	//input the value
@@ -302,8 +303,6 @@ int main()
 
 			//Quicksort Algorithm
 			QuickSort();
-
-
 			break;
 		case 2:
 
