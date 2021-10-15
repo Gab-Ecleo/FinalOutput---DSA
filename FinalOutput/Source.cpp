@@ -6,15 +6,15 @@ using namespace std;
 //Global variables
 int num[10];
 
-
 //Functions/Structures
 
-// checks for input validation 
+//checks for input validation 
 int IntegerChecker() {
 	int num;
 
 	while (!(cin >> num)) {
-		cout << "You have entered wrong input. Enter a value: ";
+		cout << "Please input the correct value" << endl
+			<< ":";
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -51,14 +51,13 @@ void RepeatMsg()
 		exit(0);
 }
 
-
 void ClearConsole()
 {
 	cout << "\033[H\033[2J";
 	cout.flush();
 }
 
-//Swapping Function
+//Switch Array value's positions
 void SwapValues(int* fVal, int* sVal)
 {
 	int placeHolder = *sVal;
@@ -66,7 +65,7 @@ void SwapValues(int* fVal, int* sVal)
 	*fVal = placeHolder;
 }
 
-//Partioning Method
+//Create a partition inside the array
 int Partition(int arr[], int minIndex, int maxIndex, int sortMethod)
 {
 	//assign pivot
@@ -108,7 +107,6 @@ int Partition(int arr[], int minIndex, int maxIndex, int sortMethod)
 	return i + 1;
 }
 
-
 void SortValues(int arr[], int minIndex, int maxIndex, int sortMethod)
 {
 	if (minIndex < maxIndex)
@@ -136,35 +134,6 @@ void PrintArray(int arr[], int arrSize)
 	cout << "\n" << endl;
 }
 
-
-void CharCount()
-{
-	string inputString;
-    cout<<"Enter String Value: ";
-    cin>>inputString;
-    std::map<char, int> charCount;
-    
-    for(char &c: inputString)
-    {
-        charCount[c]++;
-    }
-    
-	std::size_t i = 0;
-
-    for(char &c: inputString)
-    {
-        std::size_t index = inputString.find(c);
-        if(index != inputString.npos && (index == i))
-		{
-         std::cout << c <<" - " << charCount.at(c)<<std::endl;
-        }
-        ++i;
-    }
-
-
-	RepeatMsg();
-	ClearConsole();
-}
 //check the number of occurence on the array or if there is an occurence in the array
 int NumFreq(int num[], int inputNum) {
 	int count = 0;
@@ -175,6 +144,7 @@ int NumFreq(int num[], int inputNum) {
 	}
 	return count;
 }
+
 //locate the postion of the numbers and print the answer
 void SearchInput(int num[], int inputNum) {
 	int frequency = NumFreq(num, inputNum);
@@ -187,10 +157,10 @@ void SearchInput(int num[], int inputNum) {
 	else {
 		int j = 0;
 		for (int i = 0; i < 10; i++) {
-				if (num[i] == inputNum) {
-					
-					location[j] = i;
-					j++;
+			if (num[i] == inputNum) {
+
+				location[j] = i;
+				j++;
 
 			}
 		}
@@ -200,6 +170,42 @@ void SearchInput(int num[], int inputNum) {
 		}
 	}
 }
+
+void CharCount()
+{
+	string inputString;
+	cout << "Enter String Value: ";
+	cin >> inputString;
+	if (inputString.size() > 100)
+	{
+		cout << "The string value limit is 100.";
+	}
+
+	else
+	{
+		std::map<char, int> charCount;
+
+		for (char& c : inputString)
+		{
+			charCount[c]++;
+		}
+
+		std::size_t i = 0;
+
+		for (char& c : inputString)
+		{
+			std::size_t index = inputString.find(c);
+			if (index != inputString.npos && (index == i))
+			{
+				std::cout << c << " - " << charCount.at(c) << std::endl;
+			}
+			++i;
+		}
+	}
+	RepeatMsg();
+	ClearConsole();
+}
+
 void LinearSearch()
 {
 	//input the value
@@ -233,7 +239,7 @@ void LinearSearch()
 	ClearConsole();
 }
 
-void QuickSort() 
+void QuickSort()
 {
 	int arr[10] = {};
 	int sortBy = 1;
@@ -242,7 +248,7 @@ void QuickSort()
 	for (int i = 0; i < 10; i++)
 	{
 		cout << "Enter num[" << i + 1 << "]: ";
-		arr [i] = IntegerChecker();
+		arr[i] = IntegerChecker();
 		ClearConsole();
 	}
 
@@ -263,7 +269,7 @@ void QuickSort()
 		}
 		else
 			ClearConsole();
-			break;
+		break;
 	}
 
 	cout << "Sorted Array" << endl;
@@ -274,15 +280,14 @@ void QuickSort()
 	ClearConsole();
 }
 
-
-int main() 
+int main()
 {
 	//variables
 	bool isChoosing = true;
 	int algoIndex = 0;
 	int rep = 0;
 
-	while (isChoosing) 
+	while (isChoosing)
 	{
 
 		cout << left
@@ -292,7 +297,7 @@ int main()
 			<< "[4] Exit Program \n";
 
 
-		cout << "\nChoose an Algorithm: ";	
+		cout << "\nChoose an Algorithm: ";
 		algoIndex = IntegerChecker();
 		ClearConsole();
 
@@ -302,8 +307,6 @@ int main()
 
 			//Quicksort Algorithm
 			QuickSort();
-
-
 			break;
 		case 2:
 
@@ -316,7 +319,7 @@ int main()
 			//Character Counting Algorithm
 			CharCount();
 			break;
-		
+
 		case 4:
 
 			cout << "Program Ending Thank you...." << endl;
