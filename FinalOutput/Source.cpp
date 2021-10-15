@@ -135,6 +135,35 @@ void PrintArray(int arr[], int arrSize)
 	cout << "\n" << endl;
 }
 
+
+void CharCount()
+{
+    string inputString;
+    cout<<"Enter String Value: ";
+    cin>>inputString;
+    std::map<char, int> charCount;
+    
+    for(char &c: inputString)
+    {
+        charCount[c]++;
+    }
+    
+	std::size_t i = 0;
+
+    for(char &c: inputString)
+    {
+        std::size_t index = inputString.find(c);
+        if(index != inputString.npos && (index == i))
+		{
+         std::cout << c <<" - " << charCount.at(c)<<std::endl;
+        }
+        ++i;
+    }
+
+
+	RepeatMsg();
+	ClearConsole();
+}
 //check the number of occurence on the array or if there is an occurence in the array
 int NumFreq(int num[], int inputNum) {
 	int count = 0;
