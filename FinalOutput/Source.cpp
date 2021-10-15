@@ -178,25 +178,38 @@ void CharCount()
 	string inputString;
 	cout << "Enter String Value: ";
 	cin >> inputString;
-	std::map<char, int> charCount;
 
-	for (char& c : inputString)
+	if (inputString.size() > 100)
 	{
-		charCount[c]++;
+		cout << "The string value limit is 100.";
 	}
 
-	std::size_t i = 0;
-
-	for (char& c : inputString)
+	else
 	{
-		std::size_t index = inputString.find(c);
-		if (index != inputString.npos && (index == i))
+		std::map<char, int> charCount;
+
+		for (char& c : inputString)
 		{
-			std::cout << c << " - " << charCount.at(c) << std::endl;
+			charCount[c]++;
 		}
-		++i;
+
+		std::size_t i = 0;
+
+		for (char& c : inputString)
+		{
+			std::size_t index = inputString.find(c);
+			if (index != inputString.npos && (index == i))
+			{
+				std::cout << c << " - " << charCount.at(c) << std::endl;
+			}
+			++i;
+		}
 	}
+
+	RepeatMsg();
+	ClearConsole();
 }
+
 
 void LinearSearch()
 {
