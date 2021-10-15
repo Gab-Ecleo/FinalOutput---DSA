@@ -139,7 +139,7 @@ void PrintArray(int arr[], int arrSize)
 
 void CharCount()
 {
-	string inputString;
+    string inputString;
     cout<<"Enter String Value: ";
     cin>>inputString;
     std::map<char, int> charCount;
